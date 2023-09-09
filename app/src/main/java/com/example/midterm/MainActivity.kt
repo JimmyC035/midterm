@@ -45,8 +45,6 @@ class MainActivity : AppCompatActivity() {
         var jumpLoginDialog = false
 
 
-
-
         fun showLoginDialog() {
             val loginBinding = LoginBinding.inflate(LayoutInflater.from(this))
             val loginDialog = AlertDialog.Builder(this)
@@ -55,31 +53,32 @@ class MainActivity : AppCompatActivity() {
             jumpLoginDialog = true
 
 
-            loginBinding.btnLogin.setOnClickListener{
+            loginBinding.btnLogin.setOnClickListener {
                 val username = loginBinding.editUsername.text.toString()
                 val password = loginBinding.editPassword.text.toString()
 
-                    val auth = FirebaseAuth.getInstance()
-                    auth.signInWithEmailAndPassword(username, password)
-                        .addOnCompleteListener(this) { task ->
-                            if (task.isSuccessful) {
-                                viewModel.isLogin.value = true
-                                viewModel.userInfo.value = FirebaseAuth.getInstance().currentUser
-                                Log.d("Login", "signInWithEmail:success")
-                                loginDialog.dismiss()
-                            } else {
-                                val errorMessage = task.exception?.message
-                                Toast.makeText(this, "登入失敗：$errorMessage", Toast.LENGTH_SHORT).show()
-                            }
+                val auth = FirebaseAuth.getInstance()
+                auth.signInWithEmailAndPassword(username, password)
+                    .addOnCompleteListener(this) { task ->
+                        if (task.isSuccessful) {
+                            viewModel.isLogin.value = true
+                            viewModel.userInfo.value = FirebaseAuth.getInstance().currentUser
+                            Log.d("Login", "signInWithEmail:success")
+                            loginDialog.dismiss()
+                        } else {
+                            val errorMessage = task.exception?.message
+                            Toast.makeText(this, "登入失敗：$errorMessage", Toast.LENGTH_SHORT)
+                                .show()
                         }
+                    }
 
             }
 
-            loginBinding.btnRegister.setOnClickListener{
+            loginBinding.btnRegister.setOnClickListener {
                 val username = loginBinding.editUsername.text.toString()
                 val password = loginBinding.editPassword.text.toString()
                 val name = loginBinding.editName.text.toString()
-                    val auth = FirebaseAuth.getInstance()
+                val auth = FirebaseAuth.getInstance()
                 try {
                     auth.createUserWithEmailAndPassword(username, password)
                         .addOnCompleteListener(this) { task ->
@@ -90,35 +89,42 @@ class MainActivity : AppCompatActivity() {
                                     .addOnCompleteListener(this) { task ->
                                         if (task.isSuccessful) {
                                             viewModel.isLogin.value = true
-                                            viewModel.userInfo.value = FirebaseAuth.getInstance().currentUser
+                                            viewModel.userInfo.value =
+                                                FirebaseAuth.getInstance().currentUser
                                             Log.d("Login", "signInWithEmail:success")
                                             loginDialog.dismiss()
                                         } else {
                                             val errorMessage = task.exception?.message
-                                            Toast.makeText(this, "登入失敗：$errorMessage", Toast.LENGTH_SHORT).show()
+                                            Toast.makeText(
+                                                this,
+                                                "登入失敗：$errorMessage",
+                                                Toast.LENGTH_SHORT
+                                            ).show()
                                         }
                                     }
                                 loginDialog.dismiss()
                                 val userInfo = FirebaseAuth.getInstance().currentUser
                                 userInfo?.let {
-                                    val userProfileChangeRequest = UserProfileChangeRequest.Builder()
-                                        .setDisplayName(name)
-                                        .build()
+                                    val userProfileChangeRequest =
+                                        UserProfileChangeRequest.Builder()
+                                            .setDisplayName(name)
+                                            .build()
 
                                     user?.updateProfile(userProfileChangeRequest)
                                         ?.addOnCompleteListener { task ->
                                             if (task.isSuccessful) {
-                                                Log.i("profile","success")
+                                                Log.i("profile", "success")
                                             }
                                         }
                                 }
                             } else {
                                 val errorMessage = task.exception?.message
-                                Toast.makeText(this, "註冊失敗：$errorMessage", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, "註冊失敗：$errorMessage", Toast.LENGTH_SHORT)
+                                    .show()
                             }
                         }
-                }catch (e :Exception){
-                    Log.i("test","$e")
+                } catch (e: Exception) {
+                    Log.i("test", "$e")
                     Toast.makeText(this, "註冊失敗", Toast.LENGTH_SHORT).show()
                     showLoginDialog()
                 }
@@ -139,9 +145,6 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-
-
-
         // don't really needed it
 //        val navController = findNavController(R.id.fragment)
 
@@ -152,7 +155,7 @@ class MainActivity : AppCompatActivity() {
 //        val layoutManager = LinearLayoutManager(this)
 //        layoutManager.reverseLayout = true
 //        binding.recyclerview.layoutManager = layoutManager
-        fun addData(title:String,content:String,category: String) {
+        fun addData(title: String, content: String, category: String) {
             val articles = FirebaseFirestore.getInstance()
                 .collection("articles")
             val document = articles.document()
@@ -205,11 +208,13 @@ class MainActivity : AppCompatActivity() {
                 val category = dialogBinding.editCategory.text.toString()
                 val content = dialogBinding.editContent.text.toString()
 
-                if(viewModel.isLogin.value != false){
-                    addData(title,content,category)
-                }else{
-                    Toast.makeText(baseContext, "You are not logged in",
-                        Toast.LENGTH_SHORT).show()
+                if (viewModel.isLogin.value != false) {
+                    addData(title, content, category)
+                } else {
+                    Toast.makeText(
+                        baseContext, "You are not logged in",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     showLoginDialog()
                 }
 
@@ -218,11 +223,6 @@ class MainActivity : AppCompatActivity() {
 
             alertDialog.show()
         }
-
-
-
-
-
 
 
     }

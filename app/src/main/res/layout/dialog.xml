@@ -27,9 +27,9 @@
             android:id="@+id/editContent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="250dp"
+            android:gravity="top"
             android:hint="@string/content"
-            android:gravity="top" />
+            android:minHeight="250dp" />
 
         <Button
             android:id="@+id/btnSubmit"

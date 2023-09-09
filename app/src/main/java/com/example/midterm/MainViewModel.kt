@@ -19,7 +19,7 @@ class MainViewModel : ViewModel() {
     val db = FirebaseFirestore.getInstance()
     val collection = db.collection("articles").orderBy("createdTime")
 
-    val isLogin =  MutableLiveData<Boolean>(false)
+    val isLogin = MutableLiveData<Boolean>(false)
 
     var userInfo = MutableLiveData<FirebaseUser>()
 
@@ -47,17 +47,17 @@ class MainViewModel : ViewModel() {
 
 
 
-                Log.i("test234","$authorInfo")
+                Log.i("test234", "$authorInfo")
                 PostData(
-                    title = document.getString("title") ,
-                    name = document.getString("name") ,
+                    title = document.getString("title"),
+                    name = document.getString("name"),
                     author = authorInfo,
                     time = formattedDate,
                     category = document.getString("category"),
                     content = document.getString("content")
                 )
             } ?: emptyList()
-            Log.i("test3","$posts")
+            Log.i("test3", "$posts")
 
 
             // Emit the list of posts
@@ -67,16 +67,6 @@ class MainViewModel : ViewModel() {
         // Remove the listener when the flow is cancelled
         awaitClose { listenerRegistration.remove() }
     }
-
-
-
-
-
-
-
-
-
-
 
 
 }

@@ -4,9 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-            <variable
-                name="viewModel"
-                type="com.example.midterm.MainViewModel" />
+
+        <variable
+            name="viewModel"
+            type="com.example.midterm.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -66,14 +67,12 @@
             android:layout_height="56dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:foreground="@drawable/baseline_add_24"
             android:background="@drawable/circle"
-            app:maxImageSize="32dp"
+            android:foreground="@drawable/baseline_add_24"
             android:gravity="center"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-
-
+            app:layout_constraintEnd_toEndOf="parent"
+            app:maxImageSize="32dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

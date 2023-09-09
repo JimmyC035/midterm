@@ -2,6 +2,7 @@ package com.example.midterm
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +33,13 @@ class Adapter (): ListAdapter<PostData, Adapter.PostViewHolder>(DiffCallback) {
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
         val data = getItem(position)
+        val context = holder.itemView.context
+        when (data.category) {
+            "SchoolLife" -> holder.binding.category.setTextColor(ContextCompat.getColor(context, R.color.others))
+            "Beauty" -> holder.binding.category.setTextColor(ContextCompat.getColor(context, R.color.beauty))
+            "Gossiping" -> holder.binding.category.setTextColor(ContextCompat.getColor(context, R.color.gossip))
+            else -> holder.binding.category.setTextColor(ContextCompat.getColor(context, R.color.others))
+        }
         holder.bind(data)
 
     }

@@ -2,4 +2,7 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="beauty">#3C4EB4</color>
+    <color name="gossip">#59B45D</color>
+    <color name="others">#6F46BA</color>
 </resources>

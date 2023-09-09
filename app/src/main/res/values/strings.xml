@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">midterm</string>
+    <string name="publisher">Publisher</string>
+    <string name="title">Title</string>
+    <string name="category">Category</string>
+    <string name="content">Content</string>
+    <string name="submit">Submit</string>
+    <string name="username">帳號</string>
+    <string name="password">密碼</string>
+    <string name="name">名字</string>
+    <string name="register">註冊</string>
+    <string name="login">登入</string>
 </resources>

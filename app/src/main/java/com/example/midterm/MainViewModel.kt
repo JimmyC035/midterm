@@ -1,7 +1,9 @@
 package com.example.midterm
 
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
@@ -17,17 +19,9 @@ class MainViewModel : ViewModel() {
     val db = FirebaseFirestore.getInstance()
     val collection = db.collection("articles").orderBy("createdTime")
 
+    val isLogin =  MutableLiveData<Boolean>(false)
 
-
-//    init {
-//        collection.addSnapshotListener{
-//                snapshot,e ->
-//            if(e != null){
-//                Log.w("retrieve", "Listen failed.", e)
-//                return@addSnapshotListener
-//            }
-//        }
-//    }
+    var userInfo = MutableLiveData<FirebaseUser>()
 
 
     fun getPostsFlow(): Flow<List<PostData>> = callbackFlow {
